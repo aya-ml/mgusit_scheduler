@@ -14,7 +14,6 @@
   --amber:#D9A441; --amber-ink:#7A5A16;
   --lk:#3457D5; --lk-bg:#E9EDFB; --pr:#1B8F6F; --pr-bg:#E4F5EE;
   --lkpr:#8B5CF6; --lkpr-bg:#EFE9FD;
-  --shared-bg:#EFEBE0; --shared-ink:#7A6B3E;
   --radius:14px; --radius-sm:9px;
   --shadow:0 1px 2px rgba(22,35,63,0.06), 0 8px 20px -12px rgba(22,35,63,0.18);
   font-size:16px;
@@ -68,8 +67,6 @@ body{background:var(--paper);color:var(--ink);font-family:'Manrope',system-ui,sa
 .day-tab.is-today{border-color:var(--amber);border-width:2px;padding:9px 6px 8px;}
 .day-meta{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;padding:14px 2px 10px;border-bottom:1px dashed var(--line);margin-bottom:4px;}
 .day-meta h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;margin:0;}
-.day-meta .addr{font-size:0.82rem;color:var(--muted);font-weight:500;}
-.day-meta .addr b{color:var(--ink);font-weight:600;}
 .lessons{display:flex;flex-direction:column;gap:10px;padding:14px 0 8px;}
 .slot{display:flex;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative;}
 .slot-time{flex:0 0 84px;background:#EFEAD9;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;font-family:'IBM Plex Mono',monospace;border-right:1px dashed var(--line);position:relative;}
@@ -89,26 +86,77 @@ body{background:var(--paper);color:var(--ink);font-family:'Manrope',system-ui,sa
 .badge.type-ЛК{background:var(--lk-bg);color:var(--lk);}
 .badge.type-ПР{background:var(--pr-bg);color:var(--pr);}
 .badge.type-ЛКПР{background:var(--lkpr-bg);color:var(--lkpr);}
-.badge-shared{
-  display:inline-block;
-  background:var(--shared-bg);
-  color:var(--shared-ink);
-  font-family:'IBM Plex Mono',monospace;
-  font-size:0.6rem;
-  padding:2px 8px;
-  border-radius:999px;
-  font-weight:600;
-  letter-spacing:0.02em;
-  cursor:help;
-  border:1px solid rgba(122,107,62,0.2);
-  line-height:1.4;
-  max-width:100%;
-  word-break:break-word;
-}
 .card-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;line-height:1.28;margin:0 0 4px;}
 .card-meta{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:0.85rem;color:var(--muted);}
 .card-meta span{display:inline-flex;align-items:center;gap:5px;}
 .card-meta svg{flex-shrink:0;opacity:0.55;}
+
+/* ======= НОВЫЙ КРАСИВЫЙ БЛОК «СОВМЕСТНО С» ======= */
+.shared-block{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:9px;
+  padding:7px 10px 7px 9px;
+  background:linear-gradient(135deg, rgba(217,164,65,0.13), rgba(217,164,65,0.04));
+  border-radius:9px;
+  border:1px solid rgba(217,164,65,0.25);
+  position:relative;
+}
+.shared-block::before{
+  content:"";
+  position:absolute;
+  left:0; top:6px; bottom:6px;
+  width:3px;
+  border-radius:0 3px 3px 0;
+  background:linear-gradient(180deg, var(--amber), #B97F22);
+}
+.shared-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px; height:20px;
+  border-radius:50%;
+  background:rgba(217,164,65,0.22);
+  color:var(--amber-ink);
+  flex-shrink:0;
+  margin-left:6px;
+}
+.shared-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.66rem;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--amber-ink);
+  margin-right:2px;
+}
+.shared-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+}
+.shared-chip{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.66rem;
+  font-weight:600;
+  letter-spacing:0.02em;
+  padding:2px 8px;
+  border-radius:999px;
+  background:#FFFFFF;
+  color:var(--ink);
+  border:1px solid rgba(217,164,65,0.4);
+  box-shadow:0 1px 0 rgba(122,90,22,0.06);
+  white-space:nowrap;
+  transition:transform .12s, box-shadow .12s;
+}
+.shared-chip:hover{
+  transform:translateY(-1px);
+  box-shadow:0 2px 4px rgba(122,90,22,0.15);
+}
+/* ================================================ */
+
 .empty-slot{color:var(--muted-2);font-size:0.88rem;font-style:italic;padding:6px 0;}
 .day-off{text-align:center;padding:44px 20px;color:var(--muted);}
 .day-off .big{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--ink);margin-bottom:6px;font-weight:600;}
@@ -118,7 +166,7 @@ body{background:var(--paper);color:var(--ink);font-family:'Manrope',system-ui,sa
 .dot-lk{background:var(--lk);}
 .dot-pr{background:var(--pr);}
 .dot-lkpr{background:var(--lkpr);}
-.dot-shared{background:var(--shared-ink);border-radius:3px;}
+.dot-shared{background:linear-gradient(135deg, var(--amber), #B97F22);border-radius:3px;}
 .page-footer{max-width:920px;margin:26px auto 30px;padding:0 20px;text-align:center;}
 .page-footer p{font-size:0.76rem;color:var(--muted-2);line-height:1.5;}
 @media (max-width: 640px){
@@ -135,7 +183,8 @@ body{background:var(--paper);color:var(--ink);font-family:'Manrope',system-ui,sa
   .day-tab .dnum{font-size:1.1rem;}
   .card-name{font-size:0.95rem;}
   .day-meta h2{font-size:1.15rem;}
-  .badge-shared{font-size:0.55rem;}
+  .shared-chip{font-size:0.6rem;padding:1px 6px;}
+  .shared-label{font-size:0.6rem;}
 }
 @media (max-width: 380px){
   .slot-time{flex-basis:60px;}
@@ -196,7 +245,7 @@ button:focus-visible, .day-tab:focus-visible, .group-pill:focus-visible{outline:
     <span class="legend-item"><i class="dot-lk"></i>ЛК — лекция</span>
     <span class="legend-item"><i class="dot-pr"></i>ПР — практика</span>
     <span class="legend-item"><i class="dot-lkpr"></i>ЛК/ПР — лекция и практика</span>
-    <span class="legend-item"><i class="dot-shared"></i>совм. — та же пара у других групп</span>
+    <span class="legend-item"><i class="dot-shared"></i>Совместная пара с другой группой</span>
   </section>
 </main>
 
@@ -210,45 +259,31 @@ button:focus-visible, .day-tab:focus-visible, .group-pill:focus-visible{outline:
    Составлено по официальному XLSX.
 
    Группы: 0=ТЭД1, 1=ТЭД2, 2=СОТ1, 3=БОРТ-СОТ1, 4=ГРД1, 5=ГРД2
-   Каждая пара: массив из 6 массивов (по группам).
-   Каждая запись: {t, n, d, p, r}
-     t — ЛК / ПР / ЛКПР
-     n — название
-     d — даты через запятую
-     p — преподаватель
-     r — аудитория
    ============================================================ */
 
-/* ---- Наборы дат ---- */
 var MON_ALL   = "14.09,21.09,28.09,05.10,12.10,19.10,26.10,02.11,09.11,16.11,23.11,30.11,07.12,14.12,21.12,28.12";
 var MON_NO28  = "14.09,21.09,28.09,05.10,12.10,19.10,26.10,02.11,09.11,16.11,23.11,30.11,07.12,14.12,21.12";
 var MON_EVEN  = "14.09,28.09,12.10,26.10,09.11,23.11,07.12,21.12";
 var MON_ODD   = "21.09,05.10,19.10,02.11,16.11,30.11,14.12,28.12";
-
 var TUE_ALL   = "15.09,22.09,29.09,06.10,13.10,20.10,27.10,03.11,10.11,17.11,24.11,01.12,08.12,15.12,22.12,29.12";
-
 var WED_ALL   = "16.09,23.09,30.09,07.10,14.10,21.10,28.10,11.11,18.11,25.11,02.12,09.12,16.12,23.12,30.12";
 var WED_1     = "16.09,23.09,30.09,07.10,14.10,21.10,28.10,11.11,18.11,25.11,02.12";
 var WED_2     = "25.11,09.12,23.12";
 var WED_EVEN  = "16.09,30.09,14.10,28.10,11.11,25.11,09.12,23.12";
 var WED_ODD   = "23.09,07.10,21.10,18.11,02.12,16.12,30.12";
 var WED_DEC   = "09.12,16.12,23.12,30.12";
-
 var THU_ALL   = "17.09,24.09,01.10,08.10,15.10,22.10,29.10,05.11,12.11,19.11,26.11,03.12,10.12,17.12,24.12";
 var THU_HALF  = "17.09,01.10,15.10,29.10,12.11,26.11";
 var THU_ODD   = "24.09,08.10,22.10,05.11,19.11,03.12,17.12";
-
 var FRI_ALL   = "18.09,25.09,02.10,09.10,16.10,23.10,30.10,06.11,13.11,20.11,27.11,04.12,11.12,18.12,25.12";
 var FRI_NO25  = "18.09,25.09,02.10,09.10,16.10,23.10,30.10,06.11,13.11,20.11,27.11,04.12,11.12,18.12";
 var FRI_1     = "18.09,02.10,16.10,30.10,13.11,27.11,11.12,25.12";
 var FRI_2     = "25.09,09.10,23.10,06.11,20.11,04.12,18.12";
 var FRI_5     = "18.09,25.09,02.10,09.10,16.10,23.10,30.10,06.11,13.11,20.11,27.11";
-
 var SAT_ALL   = "19.09,26.09,03.10,17.10,24.10,31.10,07.11,14.11,21.11,28.11,05.12,12.12,19.12,26.12";
 var SAT_1     = "19.09,03.10,17.10,31.10,14.11,28.11,12.12,26.12";
 var SAT_2     = "19.09,03.10,17.10,31.10,14.11,28.11,12.12";
 
-var SHORT = ["ТЭД1","ТЭД2","СОТ1","БОРТ-СОТ1","ГРД1","ГРД2"];
 var FULL  = ["БОТ26-ТЭД1","БОТ26-ТЭД2","БОТ26-СОТ1","БОРТ26-СОТ1","БОГ26-ГРД1","БОГ26-ГРД2"];
 
 function e(t,n,d,p,r){ return {t:t, n:n, d:d, p:p, r:r}; }
@@ -257,9 +292,7 @@ var DATA = {
   mon: {
     1:{ time:["09:00","10:30"], g:[
       [e("ПР","Основы российской государственности",MON_NO28,"Куликова Юлия Альбертовна","ауд. 401")],
-      [],
-      [],
-      [],
+      [],[],[],
       [e("ПР","Организация гостиничной деятельности",MON_ODD,"Крамарова Татьяна Юрьевна","ауд. 224")],
       [e("ПР","Организация гостиничной деятельности",MON_EVEN,"Крамарова Татьяна Юрьевна","ауд. 224")]
     ]},
@@ -311,7 +344,6 @@ var DATA = {
       [],[],[],[]
     ]}
   },
-
   tue: {
     1:{ time:["09:00","10:30"], g:[
       [e("ПР","Иностранный язык (английский)",TUE_ALL,"Воробьева Наталья Валерьевна","ауд. 414")],
@@ -344,7 +376,6 @@ var DATA = {
     4:{ time:["14:20","15:50"], g:[[],[],[],[],[],[]] },
     5:{ time:["16:00","17:30"], g:[[],[],[],[],[],[]] }
   },
-
   wed: {
     1:{ time:["09:00","10:30"], g:[
       [e("ЛК","Введение в профессию",WED_1,"Беломестнова Маргарита Евгеньевна","ауд. 204")],
@@ -392,7 +423,6 @@ var DATA = {
       [e("ЛК","История России",WED_ALL,"Корень Валерий Лукич","ауд. актовый зал")]
     ]}
   },
-
   thu: {
     1:{ time:["09:00","10:30"], g:[
       [e("ПР","Физическая культура и спорт",THU_ALL,"Тарасов Леонид Алексеевич","ауд. зал спортивный №1 (учебный корпус)")],
@@ -435,7 +465,6 @@ var DATA = {
       [e("ПР","Физическая культура и спорт",THU_HALF,"вакансия","ауд. зал спортивный")]
     ]}
   },
-
   fri: {
     1:{ time:["09:00","10:30"], g:[
       [],[],[],[],[],
@@ -483,7 +512,6 @@ var DATA = {
       [e("ЛК","Основы российской государственности",FRI_5,"Куликова Юлия Альбертовна","ауд. Актовый зал")]
     ]}
   },
-
   sat: {
     1:{ time:["09:00","10:30"], g:[
       [e("ПР","Философия",SAT_ALL,"Бутырина Станислава Альбиновна","ауд. 526")],
@@ -549,7 +577,6 @@ var DATA = {
   function mondayOf(d){var x=new Date(d); var w=x.getDay(); var diff=(w===0?-6:1-w); x.setDate(x.getDate()+diff); x.setHours(0,0,0,0); return x;}
 
   var FIRST_MON = mondayOf(SEM_START);
-  var LAST_MON  = mondayOf(SEM_END);
   function weekIdx(d){return Math.round((mondayOf(d)-FIRST_MON)/(7*24*3600*1000));}
   var TOTAL_WEEKS = weekIdx(SEM_END)+1;
   function weekStart(i){return addDays(FIRST_MON, i*7);}
@@ -642,13 +669,12 @@ var DATA = {
 
   var I_TEACH = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
   var I_ROOM  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01"/></svg>';
-  var I_PIN   = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  var I_USERS = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
 
   function esc(s){return (s||"").replace(/[&<>"']/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
   function tLabel(t){return t==='ЛК' ? 'ЛК' : (t==='ПР' ? 'ПР' : 'ЛК/ПР');}
   function normRoom(r){return (r||"").replace(/^ауд\.\s*/i,"").replace(/\s+/g," ").trim().toLowerCase();}
 
-  /* Ищем другие группы, у которых в этот же день/пару/дату та же пара в той же аудитории */
   function findShared(dayKey, pairNum, dateStr, room, name, currentGroup){
     var pd = DATA[dayKey] && DATA[dayKey][pairNum];
     if(!pd) return [];
@@ -703,17 +729,29 @@ var DATA = {
           html += '<div class="card type-'+en.t+'">';
           html += '<div class="card-top">';
           html += '<span class="badge type-'+en.t+'">'+tLabel(en.t)+'</span>';
-          var shared = findShared(dayKey, pn, dd, en.r, en.n, state.group);
-          if(shared.length > 0){
-            var names = shared.map(function(i){return SHORT[i];}).join(", ");
-            html += '<span class="badge-shared" title="Общая пара с: '+names+'">совм.: '+names+'</span>';
-          }
           html += '</div>';
           html += '<p class="card-name">'+esc(en.n)+'</p>';
           html += '<div class="card-meta">';
           if(en.p) html += '<span>'+I_TEACH+' '+esc(en.p)+'</span>';
           if(en.r) html += '<span>'+I_ROOM+' '+esc(en.r)+'</span>';
-          html += '</div></div>';
+          html += '</div>';
+
+          /* ====== КРАСИВЫЙ БЛОК СОВМЕСТНОЙ ПАРЫ ====== */
+          var shared = findShared(dayKey, pn, dd, en.r, en.n, state.group);
+          if(shared.length > 0){
+            html += '<div class="shared-block">';
+            html += '<span class="shared-icon">'+I_USERS+'</span>';
+            html += '<span class="shared-label">Совместно с</span>';
+            html += '<span class="shared-chips">';
+            shared.forEach(function(i){
+              html += '<span class="shared-chip">'+FULL[i]+'</span>';
+            });
+            html += '</span>';
+            html += '</div>';
+          }
+          /* ========================================== */
+
+          html += '</div>';
         });
       }
       html += '</div></div>';
